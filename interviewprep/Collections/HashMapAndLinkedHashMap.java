@@ -21,23 +21,45 @@ Use Cases: Suitable when you need to maintain the insertion order of the element
  */
 public class HashMapAndLinkedHashMap {
     public static void main(String[] args) {
-
-
         Map<String, Integer> countMap = new HashMap<>();
-
-
         String name = "jatin batish";
-
         String[] arrOfName = name.split(" ");
-
         for (String c: arrOfName) {
-
             countMap.merge(c, 1, Integer::sum);
         }
-
         System.out.println(countMap+"-"+countMap.getClass());
 
 
+        Map<String,Integer> linkedMap = new LinkedHashMap<>();
+        linkedMap.put("one",1);
+        linkedMap.put("two",2);
+        linkedMap.put("three",3);
+        linkedMap.put("four",4);
+
+        for(Map.Entry<String,Integer> entry: linkedMap.entrySet()){
+            System.out.println(entry);
+        }
+
+        // accessing element to check if order is maintained
+        System.out.println(linkedMap.get("two"));
+
+
+        // using LinkedHashMap with access-order enabled (for LRU caching)
+
+        Map<String,Integer> accessOrderMap = new LinkedHashMap<>(16,0.75f,true);
+
+        accessOrderMap.put("one",1);
+        accessOrderMap.put("two",2);
+        accessOrderMap.put("three",3);
+        accessOrderMap.put("four",4);
+
+        // accessing some elements
+        System.out.println(accessOrderMap.get("one"));
+        System.out.println(accessOrderMap.get("two"));
+
+
+        // printing after access to show LRU order (least recently used to goes to end)
+        System.out.println("LinkedHashMap with access order: "+accessOrderMap);
 
     }
 
