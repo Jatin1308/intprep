@@ -18,6 +18,7 @@ public class HashSetAndTreeSet {
             Timecompl: O(log n) for add , remove, and contains operations
 
             Ordering: Maintains elements in sorted order
+            UseCase:  suitable when you need to maintain a sorted order of elements
          */
 
 
