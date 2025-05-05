@@ -16,17 +16,17 @@ class SharedCounter{
 //    public int getCount(){return count.get();}
     //*******
 
-    private int  count;
+    private  int  count;
 
 //    public synchronized void increment(){count++;}
     /*
     we can use it like this as well, to make the particular line as synchronized
      */
-    public void increment(){
-        System.out.println("hello!, this is not synchronized");
-        synchronized (this){
+    public /*synchronized*/ void increment(){
+//        System.out.println("hello!, this is not synchronized");
+//        synchronized (this){
             count++;
-        }
+//        }
     }
     public int getCount() {return count;}
 

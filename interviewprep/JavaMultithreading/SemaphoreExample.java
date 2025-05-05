@@ -17,21 +17,21 @@ public class SemaphoreExample {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Thread a = new Thread(() -> {
-            System.out.println("Thread 1");
-        });
+//        Thread a = new Thread(() -> {
+//            System.out.println("Thread 1");
+//        });
+//
+//        Thread b = new Thread(() -> {
+//            System.out.println("Thread 2");
+//        });
+//        a.start();
+//        b.start();
+//        a.run();
+//        b.run();
 
-        Thread b = new Thread(() -> {
-            System.out.println("Thread 2");
-        });
-        a.start();
-        b.start();
-        a.run();
-        b.run();
 
 
-
-        /*// create and start multiple threads
+        // create and start multiple threads
         for(int i = 0; i<NUM_THREADS;i++){
             Thread thread = new Thread(() -> {
                 try{
@@ -45,7 +45,7 @@ public class SemaphoreExample {
                 }
             });
             thread.start();
-        }*/
+        }
 
     }
 }
