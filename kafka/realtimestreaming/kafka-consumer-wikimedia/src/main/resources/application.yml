@@ -1,0 +1,17 @@
+spring:
+  kafka:
+    consumer:
+      group: myGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      bootstrap-servers: localhost:9092
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/wikimedia
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
