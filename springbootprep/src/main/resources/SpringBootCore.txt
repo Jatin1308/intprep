@@ -1,0 +1,18 @@
+1. Essential Springboot Annotations
+    - @SpringBootApplication: @EnableAutoConfiguration + @ComponentScan + @Configuration
+    - @Transactional: Demarcates methods that are managed by spring's transaction management
+    - @Configuration: tells spring to create a bean of this class and it has 1 or more @Bean methods
+    - @EnableAutoConfiguration
+    - @ComponentScan: to tell spring to scan particular packages for scanning to create and inject beans in the context
+    - @Bean: indicates that a method produces a bean to be managed by spring container.
+    - @Autowired: resolve and inject bean into you beans/classes
+    - @Component: marks a java class as a spring component
+    - @Service: marks class as service provider - specialization of @Component
+    - @Repository: specialization of @Component, indicates that class provides the mech for storage, retrieval, search , update
+                   and delete operations, has additional features for exception translation, Spring translates db related exceptions
+                   into Spring's DataAccessException, making exception handling more consistent and portable across different databases
+    - @Controller: specialization of @Component, marks class as spring mvc controller
+    - @RestController: convenience annotation that combines @Controller and @ResponseBody
+    - @RequestMapping: for mapping requests to specific handler classes or methods     and many more.....................
+
+2.

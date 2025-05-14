@@ -1,0 +1,82 @@
+1. what happens inside run() method of springboot
+    - main entry point -> reads the cmdline arguments
+    - creates instance of ApplicationContext(core container for managing beans)
+    - environment preparation: sets up ConfigurableEnvironment, gives access to env and sys variables
+    - banner display
+    - register application listeners
+    - Context refresh: context is refreshed, involves loading all the necessary beans, configuring them and initializing them.
+    - CommandLineRunner Execution: if application has CommandLineRunner or ApplicationRunner beans their run() methods are executed after the application
+                                    context is fully initialized
+    - Application Start event: ApplicationStartedEvent is published so that other can react
+    - Application Hook Registration:  SpringBoot registers shutdown hook with the jvm to ensure a graceful shutdown when application is terminated
+                                     this ensures that resources are cleaned up and beans are properly closed.
+
+2. what is relaxed binding?
+    - allows us to define configuration in different formats and automatically maps them to corresponding fields in your java class
+    - different formats that are supported are:
+        - kebab-case
+        - snake_case
+        - camelCase
+        - UpperCamelCase or PascalCase
+
+
+3. Customizing autoconfiguration
+    - use application.properties or yml file. e.g.: server.port=8081 (default is 8080 and changed to 8081)
+    - Conditional Beans with @ConditionalOn.... Annotations
+        - @ConditionalOnProperty(name="my.feature.enabled", havingValue="true")
+        - @ConditionalOnClass
+        - @ConditionalOnMissingBean
+    - Using custom configuration classes, Like we can create customer configuration class for connecting to multiple dbs
+
+4. Disable Autoconfiguration
+    - use @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+
+5. How to tell Auto-Configuration to not run when a Bean exists?
+    - Create AutoConfiguration Class
+        - Define a configuration class with @ConditionalOnMissingBean
+
+        @Configuration
+        public class MyCustomAutoConfiguration{
+            @Bean
+            @ConditionalOnMissingBean
+            public MyService myService(){
+                return new MyService();
+            }
+        }
+        -  register in spring.factories
+
+6. How to deploy spring boot web applications as JAR and WAR files?
+    - Deploying as jar file
+        - add springboot maven plugin :- spring-boot-maven-plugin
+        - package the application: mvn clean package
+        - execute the jar file using the java command
+    - Deploying as war file
+        - modify the main class - extend with SpringBootServletInitializer
+        - adjust packaging to war
+        - add tomcat dependency
+
+5. Tomcat vs netty
+    - tomcat
+        - default for springboot
+        - built around servlet API, which fits naturally with traditional Spring MVC
+        - use thread per-request model, which means each incoming request is handled by separate thread
+        - simple to set up - just add the web starter dependency
+
+        - Internal Architecture
+            - Connector: manages the n/w connections accepting and processing http requests
+            - Container: responsible for servlet lifecycle management, including loading, initialization and invocation
+            - Threading Model: uses basic thread pool can lead to scalability issues under high load due to thread contention and memory overhead
+
+
+    - netty
+        - default for spring webflux
+        - highly performant, asynchronous event driven network application framework, designed for reactive programming
+
+        - Internal Architecture
+            - Event Loop: uses eventloops from eventgroups .
+            - channel: represents a connection such as an incoming http request and is associated with an event loop
+            - ThreadingModel: Nettys uses a small number of threads to handle many connections. Each event loops run s a single thread
+                              and  handles multiple channels making ti highly suitable
+
+
+
